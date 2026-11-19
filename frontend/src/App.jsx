@@ -442,8 +442,8 @@ async function loadUsers() {
 
         <nav>
           <a className="active" href="#">Dashboard</a>
-          <a href="#tasks">My Tasks</a>
-          <a href="#tasks">Categories</a>
+          <a href="#my-tasks">My Tasks</a>
+          <a href="#categories">Categories</a>
         </nav>
 
         <div className="sidebar-bottom">
@@ -674,6 +674,36 @@ async function loadUsers() {
           )}
 
         </section>
+
+        <section className="tasks" id="categories">
+          <div className="task-heading">
+            <h2>Categories</h2>
+          </div>
+
+          <div className="stats">
+            {[...new Set(
+              tasks
+                .map(task => task.category?.trim())
+                .filter(Boolean)
+            )].map(categoryName => {
+              const count = tasks.filter(
+                task => task.category?.trim() === categoryName
+              ).length
+
+              return (
+                <div className="stat-card" key={categoryName}>
+                  <h3>{categoryName}</h3>
+                  <p>{count} {count === 1 ? 'Task' : 'Tasks'}</p>
+                </div>
+              )
+            })}
+
+            {tasks.every(task => !task.category?.trim()) && (
+              <p>No categories yet. Add a category to your task.</p>
+            )}
+          </div>
+        </section>
+
       </main>
     </div>
   )
