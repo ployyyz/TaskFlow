@@ -6,11 +6,9 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const verifyToken = require('./authMiddleware');
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
-app.use(cors({
-    origin: 'http://localhost:5173'
-}));
+
 app.use(express.json());
 
 // Test API
